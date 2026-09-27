@@ -1,0 +1,12 @@
+# Configuration locale et métadonnées de publication
+.openai/
+.sites-runtime/
+
+# Données locales éventuellement exportées depuis le navigateur
+*.local
+profile*.json
+result*.json
+
+# Archives et journaux de travail
+*.tar.gz
+*.log

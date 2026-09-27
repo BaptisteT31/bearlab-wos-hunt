@@ -1,0 +1,40 @@
+{
+  "profile_id": "standard-bear-joiner-v1",
+  "purpose": "Rally joiner reference used by BearLab for every simulated non-user participant.",
+  "slots": [
+    {
+      "position": 1,
+      "hero": "Jessie",
+      "skill": "Stand of Arms",
+      "skill_level": 5,
+      "effect": "Increasing damage dealt by all troops by 25%",
+      "confidence": "very_probable",
+      "why": "The leftmost hero's first expedition skill is the only joiner skill consistently reported as eligible."
+    },
+    {
+      "position": 2,
+      "hero": "Jasser",
+      "skill_level": 5,
+      "confidence": "irrelevant_for_current_joiner_model",
+      "why": "Fixed for reproducibility; no independent evidence that a joiner's second slot changes Bear damage."
+    },
+    {
+      "position": 3,
+      "hero": "Seo-yoon",
+      "skill_level": 5,
+      "confidence": "irrelevant_for_current_joiner_model",
+      "why": "Fixed for reproducibility; no independent evidence that a joiner's third slot changes Bear damage."
+    }
+  ],
+  "selection_policy": {
+    "candidate_pool": "One first expedition skill per joiner",
+    "active_slots": 4,
+    "tie_breaking": "Reported as join order when skill level is tied; model records this as very probable rather than confirmed.",
+    "duplicate_policy": "Do not assume duplicate skills stack or do not stack without an ingame test; show the issue in the audit."
+  },
+  "sources": [
+    "https://www.whiteoutsurvival-community.com/tools/wiki/events/bear-trap-wsco.html",
+    "https://woslogs.com/guides/bear-trap-gen4",
+    "https://www.reddit.com/r/whiteoutsurvival/comments/1sysyp4/bear_trap_joiners/"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "profile_id": "standard-bear-joiner-v1",
+  "slots": [
+    { "position": 1, "hero": "Jessie", "skill": "Stand of Arms", "skill_level": 5, "effect": "+25% dégâts toutes troupes", "confidence": "very_probable" },
+    { "position": 2, "hero": "Jasser", "confidence": "irrelevant_for_current_joiner_model" },
+    { "position": 3, "hero": "Seo-yoon", "confidence": "irrelevant_for_current_joiner_model" }
+  ],
+  "policy": "Le premier skill du héros en slot gauche est candidat. Quatre skills de joiners au plus seraient actifs; égalités, doublons et ordre sont signalés comme très probables, non confirmés.",
+  "sources": [
+    "https://www.whiteoutsurvival-community.com/tools/wiki/events/bear-trap-wsco.html",
+    "https://woslogs.com/guides/bear-trap-gen4",
+    "https://www.reddit.com/r/whiteoutsurvival/comments/1sysyp4/bear_trap_joiners/"
+  ]
+}
