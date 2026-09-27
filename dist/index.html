@@ -23,16 +23,17 @@
     </header>
 
     <main id="workspace">
-      <section class="intro-strip">
-        <div>
-          <p class="eyebrow">MODE DÉCISION · v0.2</p>
-          <h1>Préparer le bon héros, la bonne marche.</h1>
-          <p class="intro-text">BearLab distingue le leader du joiner et n’additionne pas artificiellement les bonus incompatibles. Les données restent sur cet appareil.</p>
+      <section class="intro-strip hero-stage">
+        <div class="hero-copy">
+          <p class="eyebrow">BEARLAB · TON PLAN DE CHASSE</p>
+          <h1>Ton Bear Hunt.<br><span>En clair.</span></h1>
+          <p class="intro-text">Héros, troupes, plan de marche. Le reste reste simple.</p>
+          <a class="hero-cta" href="#setup">Créer mon plan <span>↓</span></a>
         </div>
-        <div class="confidence-summary" aria-label="Résumé de la confiance du modèle">
-          <span><b>Leader</b> 3 héros · tous les skills expédition</span>
-          <span><b>Joiner</b> héros 1 · skill 1 uniquement</span>
-          <span><b>Privé</b> profil et journal en local</span>
+        <div class="confidence-summary hero-pills" aria-label="Résumé du fonctionnement">
+          <span><b>01</b><em>Ton profil</em></span>
+          <span><b>02</b><em>Ton roster</em></span>
+          <span><b>03</b><em>Ton plan</em></span>
         </div>
       </section>
 
@@ -45,7 +46,7 @@
 
       <section class="notice" aria-label="Limite importante">
         <span class="notice-icon">!</span>
-        <p><strong>Lecture utile, pas fausse précision.</strong> Les dégâts absolus, les procs et les bonus par type restent séparés tant qu’ils ne sont pas validés par des rapports comparables.</p>
+        <p><strong>Zéro fausse précision.</strong> Les bonus incertains restent visibles, jamais transformés en chiffres magiques.</p>
         <a href="formulas.html" target="_blank">Lire le modèle</a>
       </section>
 
@@ -55,7 +56,7 @@
           <span class="section-state">2 minutes</span>
         </div>
         <div class="config-grid">
-          <article class="panel profile-panel">
+          <article class="panel profile-panel profile-card">
             <div class="panel-title"><span class="step">A</span><h3>Serveur &amp; événement</h3></div>
             <label>Nom du profil <input id="profileName" type="text" value="Mon compte" maxlength="48" /></label>
               <div class="form-row">
@@ -68,7 +69,7 @@
             </div>
           </article>
 
-          <article class="panel doctrine-panel">
+          <article class="panel doctrine-panel roles-card">
             <div class="panel-title"><span class="step">B</span><h3>Scénario de référence</h3></div>
             <div class="scenario-card">
               <span class="scenario-tag">JE LANCE</span>
@@ -81,7 +82,7 @@
           </article>
         </div>
 
-        <article class="panel troops-panel">
+        <article class="panel troops-panel troops-card">
           <div class="panel-title"><span class="step">C</span><h3>Stocks disponibles</h3><span class="panel-note">Quantité totale par type</span></div>
           <div class="troop-quick-grid" role="group" aria-label="Stocks de troupes">
             <label class="troop-quick infantry"><span class="troop-type"><i></i>Infanterie</span><input id="infQty" type="number" min="0" value="20000" /><small>structure</small></label>
@@ -94,7 +95,7 @@
 
       <section id="heroes" class="content-section">
         <div class="section-heading">
-          <div><p class="eyebrow">02 · ROSTER</p><h2>Vos héros et leur skill drapeau</h2><p>Cochez les héros possédés, puis indiquez le niveau de leur premier skill d’expédition. C’est le seul skill utilisé quand vous rejoignez un rally.</p></div>
+          <div><p class="eyebrow">02 · TON ROSTER</p><h2>Choisis tes héros</h2><p>Coche les héros possédés et leur niveau de skill drapeau.</p></div>
           <div class="legend"><span class="legend-dot verified"></span> pris en charge <span class="legend-dot pending"></span> à vérifier</div>
         </div>
         <div class="hero-toolbar">
@@ -123,7 +124,8 @@
 
       <section id="optimizer" class="content-section optimizer-section">
         <div class="optimizer-header">
-          <div><p class="eyebrow">03 · MON PLAN</p><h2>Préparer mes marches</h2><p>Un leader robuste, vos héros de slot 1 et les inconnues à tester — sans chiffre de dégâts fictif.</p></div>
+          <div><p class="eyebrow">03 · TON PLAN</p><h2>Prêt à lancer</h2><p>Un leader, tes marches, les points à surveiller.</p></div>
+          <img class="plan-art" src="assets/compass-map.png" alt="Boussole sur une carte enneigée" />
           <button id="optimize" class="optimize-button"><span>◆</span> GÉNÉRER MON PLAN</button>
         </div>
         <div id="results" class="results empty-results">

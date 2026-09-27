@@ -109,7 +109,7 @@ function renderHeroes() {
     const state = getHeroState(hero.id);
     const value = hero.primary.values[(state.skill || 1) - 1] || 0;
     const status = hero.verified ? "<span class=\"status-chip verified\">sourcé</span>" : "<span class=\"status-chip pending\">à vérifier</span>";
-    return `<article class="hero-card ${state.owned?"owned":""} ${hero.verified?"":"pending"}" data-hero="${hero.id}">
+    return `<article class="hero-card ${hero.troop} ${state.owned?"owned":""} ${hero.verified?"":"pending"}" data-hero="${hero.id}">
       <div class="hero-head"><div><h3 class="hero-name">${hero.name}</h3><div class="hero-meta">G${hero.generation} · ${hero.rarity} · ${troopLabel(hero.troop)}</div></div>${status}</div>
       <p class="hero-skill"><b>${hero.primary.name} · ${categoryLabel(hero.primary.category)}</b>${hero.primary.text}${value ? ` <strong>+${value}%</strong>` : ""}</p>
       <div class="hero-controls"><label>Skill drapeau<select class="hero-skill-select" data-id="${hero.id}" ${hero.verified?"":"disabled"}>${[1,2,3,4,5].map(n=>`<option value="${n}" ${state.skill===n?"selected":""}>Niv. ${n}</option>`).join("")}</select></label><label class="own-check"><input class="hero-owned" data-id="${hero.id}" type="checkbox" ${state.owned?"checked":""} /> Possédé</label></div>
