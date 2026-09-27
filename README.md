@@ -16,7 +16,7 @@ Puis visitez `http://localhost:8080`.
 
 - filtre le roster par génération de serveur ;
 - mémorise le profil et les rapports sur l’appareil avec `localStorage` ;
-- propose des leaders et joiners à partir des effets permanents et documentés ;
+- examine les effets offensifs d’expédition documentés des trois héros leaders, et le seul premier skill du héros de slot 1 lorsqu’on rejoint ;
 - alloue un plan de marches sur le ratio communautaire 10 / 10 / 80, sans le présenter comme une formule de combat ;
 - isole les configurations comparables, non comparables et les valeurs à calibrer.
 

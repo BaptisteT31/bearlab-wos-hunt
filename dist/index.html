@@ -25,92 +25,87 @@
     <main id="workspace">
       <section class="intro-strip">
         <div>
-          <p class="eyebrow">MODÈLE TRANSPARENT · v0.1</p>
-          <h1>Optimiser sans inventer de formule.</h1>
-          <p class="intro-text">BearLab sépare les mécanismes corroborés, les estimations et les inconnues. Les résultats sont des recommandations relatives tant qu’un jeu de rapports réels ne permet pas de calibrer le compte.</p>
+          <p class="eyebrow">MODE DÉCISION · v0.2</p>
+          <h1>Préparer le bon héros, la bonne marche.</h1>
+          <p class="intro-text">BearLab distingue le leader du joiner et n’additionne pas artificiellement les bonus incompatibles. Les données restent sur cet appareil.</p>
         </div>
         <div class="confidence-summary" aria-label="Résumé de la confiance du modèle">
-          <span><b id="confirmedCount">7</b> établi / multi-source</span>
-          <span><b id="probableCount">5</b> très probable</span>
-          <span><b id="unknownCount">6</b> inconnues bloquantes</span>
+          <span><b>Leader</b> 3 héros · tous les skills expédition</span>
+          <span><b>Joiner</b> héros 1 · skill 1 uniquement</span>
+          <span><b>Privé</b> profil et journal en local</span>
         </div>
       </section>
 
       <nav class="section-nav" aria-label="Navigation dans l'optimiseur">
-        <button class="nav-pill active" data-target="setup">01 · Compte</button>
+        <button class="nav-pill active" data-target="setup">01 · Profil</button>
         <button class="nav-pill" data-target="heroes">02 · Héros</button>
-        <button class="nav-pill" data-target="bonuses">03 · Bonus</button>
-        <button class="nav-pill" data-target="optimizer">04 · Optimiseur</button>
-        <button class="nav-pill" data-target="evidence">05 · Preuves</button>
+        <button class="nav-pill" data-target="optimizer">03 · Mon plan</button>
+        <button class="nav-pill" data-target="bonuses">Avancé</button>
       </nav>
 
       <section class="notice" aria-label="Limite importante">
         <span class="notice-icon">!</span>
-        <p><strong>Pas de faux dégâts absolus.</strong> L’algorithme ne transforme pas l’attaque, la létalité ou les procs en millions de dégâts sans coefficient vérifié. Il privilégie les bonus compatibles et expose les arbitrages non démontrés.</p>
+        <p><strong>Lecture utile, pas fausse précision.</strong> Les dégâts absolus, les procs et les bonus par type restent séparés tant qu’ils ne sont pas validés par des rapports comparables.</p>
         <a href="formulas.html" target="_blank">Lire le modèle</a>
       </section>
 
       <section id="setup" class="content-section">
         <div class="section-heading">
-          <div><p class="eyebrow">01 · POINT DE DÉPART</p><h2>Profil et capacité opérationnelle</h2></div>
-          <span class="section-state">À renseigner</span>
+          <div><p class="eyebrow">01 · POINT DE DÉPART</p><h2>Votre capacité de marche</h2></div>
+          <span class="section-state">2 minutes</span>
         </div>
         <div class="config-grid">
           <article class="panel profile-panel">
             <div class="panel-title"><span class="step">A</span><h3>Serveur &amp; événement</h3></div>
             <label>Nom du profil <input id="profileName" type="text" value="Mon compte" maxlength="48" /></label>
+              <div class="form-row">
+                <label>Génération actuelle <select id="generation"></select><small>La génération de serveur filtre les héros et pets proposés.</small></label>
+              <label>Amélioration du piège <select id="trapLevel"><option value="0">Inconnue</option><option value="1">Niv. 1 · +5% ATK</option><option value="2">Niv. 2 · +10% ATK</option><option value="3">Niv. 3 · +15% ATK</option><option value="4">Niv. 4 · +20% ATK</option><option value="5" selected>Niv. 5 · +25% ATK</option></select><small>Buff Bear documenté : +5% ATK par niveau.</small></label>
+              </div>
             <div class="form-row">
-              <label>Génération actuelle <select id="generation"></select><small>La génération de serveur filtre les héros et pets proposés.</small></label>
-              <label>Niveau du piège <select id="trapLevel"><option value="0">Inconnu</option><option value="1">Niv. 1 · +5% ATK</option><option value="2">Niv. 2 · +10% ATK</option><option value="3">Niv. 3 · +15% ATK</option><option value="4">Niv. 4 · +20% ATK</option><option value="5" selected>Niv. 5 · +25% ATK</option></select><small>Bonus communautaire à vérifier dans le jeu.</small></label>
-            </div>
-            <div class="form-row triple">
               <label>Capacité d’une marche <input id="marchCapacity" type="number" min="1" value="100000" /></label>
-              <label>Capacité du rally <input id="rallyCapacity" type="number" min="1" value="500000" /></label>
               <label>Marches simultanées <input id="marches" type="number" min="1" max="8" value="3" /></label>
             </div>
-            <label>Participants standard dans un rally rejoint <input id="standardJoiners" type="number" min="0" max="100" value="18" /><small>Leader + vous + N profils standards; l’effet au-delà de 4 skills actifs est signalé.</small></label>
           </article>
 
           <article class="panel doctrine-panel">
             <div class="panel-title"><span class="step">B</span><h3>Scénario de référence</h3></div>
             <div class="scenario-card">
-              <span class="scenario-tag">RALLY REJOINT</span>
-              <p>Le leader a exactement votre profil. Les autres membres utilisent tous la même marche : <strong>Jessie → Jasser → Seo-yoon</strong>.</p>
-              <small>Seul le premier héros est actuellement pris en compte pour un joiner selon les sources recoupées; les slots 2–3 sont conservés comme constante reproductible.</small>
+              <span class="scenario-tag">JE LANCE</span>
+              <p><strong>Les trois héros</strong> apportent leurs compétences d’expédition. Le moteur isole les bonus permanents et signale les procs.</p>
             </div>
             <div class="scenario-card subdued">
-              <span class="scenario-tag">MON RALLY</span>
-              <p>Vos trois héros de leader, vos bonus de compte et la composition proposée deviennent le profil de référence du leader.</p>
-              <small>Le comparatif « lancer ou rejoindre » reste conditionnel sans séries de rapports contrôlés.</small>
+              <span class="scenario-tag">JE REJOINS</span>
+              <p><strong>Seul héros 1 · skill 1</strong> peut remplir l’un des quatre buffs actifs. Les héros 2–3 augmentent seulement votre capacité.</p>
             </div>
           </article>
         </div>
 
         <article class="panel troops-panel">
-          <div class="panel-title"><span class="step">C</span><h3>Stocks de troupes</h3><span class="panel-note">Plusieurs tiers : ajoutez les stocks supplémentaires dans le fichier exporté, ou gardez le meilleur tier ici pour une première passe.</span></div>
-          <div class="troop-table" role="group" aria-label="Stocks de troupes">
-            <div class="troop-head"><span>Type</span><span>Tier</span><span>Fire Crystal</span><span>Quantité disponible</span><span>Rôle dans Bear</span></div>
-            <div class="troop-row infantry"><span class="troop-type"><i></i>Infanterie</span><select id="infTier"></select><select id="infFc"></select><input id="infQty" type="number" min="0" value="20000" /><span class="role-copy">minimum de structure</span></div>
-            <div class="troop-row lancer"><span class="troop-type"><i></i>Lanciers</span><select id="lancerTier"></select><select id="lancerFc"></select><input id="lancerQty" type="number" min="0" value="20000" /><span class="role-copy">support / synergies</span></div>
-            <div class="troop-row marksman"><span class="troop-type"><i></i>Tireurs</span><select id="markTier"></select><select id="markFc"></select><input id="markQty" type="number" min="0" value="180000" /><span class="role-copy">priorité communautaire</span></div>
+          <div class="panel-title"><span class="step">C</span><h3>Stocks disponibles</h3><span class="panel-note">Quantité totale par type</span></div>
+          <div class="troop-quick-grid" role="group" aria-label="Stocks de troupes">
+            <label class="troop-quick infantry"><span class="troop-type"><i></i>Infanterie</span><input id="infQty" type="number" min="0" value="20000" /><small>structure</small></label>
+            <label class="troop-quick lancer"><span class="troop-type"><i></i>Lanciers</span><input id="lancerQty" type="number" min="0" value="20000" /><small>synergies</small></label>
+            <label class="troop-quick marksman"><span class="troop-type"><i></i>Tireurs</span><input id="markQty" type="number" min="0" value="180000" /><small>priorité Bear</small></label>
           </div>
-          <p class="microcopy">Le biais tireurs est une recommandation multi-source (ours sans contre-attaque), pas un coefficient de dégâts codé en dur. BearLab ne suppose aucune valeur cachée de tier.</p>
+          <p class="microcopy">Proposition initiale : 10 % infanterie / 10 % lanciers / 80 % tireurs. Les tiers et Fire Crystals ne sont pas convertis en dégâts faute de coefficient vérifié.</p>
         </article>
       </section>
 
       <section id="heroes" class="content-section">
         <div class="section-heading">
-          <div><p class="eyebrow">02 · ROSTER</p><h2>Héros possédés</h2><p>Sélectionnez uniquement vos héros et leur premier skill d’expédition. Les cartes grises restent visibles mais ne sont pas utilisées sans valeur vérifiée.</p></div>
+          <div><p class="eyebrow">02 · ROSTER</p><h2>Vos héros et leur skill drapeau</h2><p>Cochez les héros possédés, puis indiquez le niveau de leur premier skill d’expédition. C’est le seul skill utilisé quand vous rejoignez un rally.</p></div>
           <div class="legend"><span class="legend-dot verified"></span> pris en charge <span class="legend-dot pending"></span> à vérifier</div>
         </div>
         <div class="hero-toolbar">
-          <div class="filter-group" id="heroFilters" aria-label="Filtrer les héros"><button data-filter="all" class="filter-button active">Disponibles</button><button data-filter="owned" class="filter-button">Possédés</button><button data-filter="verified" class="filter-button">Données vérifiées</button></div>
+          <div class="filter-group" id="heroFilters" aria-label="Filtrer les héros"><button data-filter="verified" class="filter-button active">Fiches sourcées</button><button data-filter="owned" class="filter-button">Possédés</button><button data-filter="all" class="filter-button">Tout voir</button></div>
           <button class="text-button" id="addHero">+ Ajouter une fiche locale</button>
         </div>
         <div id="heroGrid" class="hero-grid"></div>
       </section>
 
-      <section id="bonuses" class="content-section">
+      <details id="bonuses" class="advanced-section content-section">
+        <summary><span>Bonus avancés &amp; checklist</span><small>Facultatif — utile pour comparer des rapports</small></summary>
         <div class="section-heading">
           <div><p class="eyebrow">03 · MODIFICATEURS</p><h2>Bonus qui méritent d’être mesurés</h2><p>Renseignez une valeur uniquement si elle apparaît dans votre aperçu de bonus ou une fiche ingame. Tous les champs restent séparés pour ne pas masquer l’ordre d’application inconnu.</p></div>
           <span class="section-state teal">Vecteur de bonus</span>
@@ -124,26 +119,27 @@
           <article class="panel pets-panel"><div class="panel-title"><span class="step">P</span><h3>Pets activés</h3><span class="panel-note">Le statut indique ce qui doit être vérifié au moment de l’événement.</span></div><div id="petGrid" class="pet-grid"></div></article>
           <article class="panel check-panel"><div class="panel-title"><span class="step">✓</span><h3>Checklist pré-Bear</h3></div><label class="check"><input type="checkbox" id="buffCity" /> Buff de ville attaque/létalité actif</label><label class="check"><input type="checkbox" id="buffMinister" /> Titre Ministère vérifié et actif</label><label class="check"><input type="checkbox" id="buffChief" /> Chief Gear / Charms inclus dans l’aperçu</label><label class="check"><input type="checkbox" id="buffResearch" /> Recherche / War Academy incluse</label><label class="check"><input type="checkbox" id="buffHeroGear" /> Hero Gear du leader vérifié</label><label class="check"><input type="checkbox" id="buffPets" /> Fenêtre de durée des pets compatible</label><p class="microcopy">Les cases sont des traces d’audit, pas des multiplicateurs supplémentaires.</p></article>
         </div>
-      </section>
+      </details>
 
       <section id="optimizer" class="content-section optimizer-section">
         <div class="optimizer-header">
-          <div><p class="eyebrow">04 · DÉCISION</p><h2>Optimiser mon Bear Hunt</h2><p>Le moteur cherche les choix dominants sur les bonus établis et décrit les choix impossibles à départager sans calibration.</p></div>
-          <button id="optimize" class="optimize-button"><span>◆</span> OPTIMISER MON BEAR HUNT</button>
+          <div><p class="eyebrow">03 · MON PLAN</p><h2>Préparer mes marches</h2><p>Un leader robuste, vos héros de slot 1 et les inconnues à tester — sans chiffre de dégâts fictif.</p></div>
+          <button id="optimize" class="optimize-button"><span>◆</span> GÉNÉRER MON PLAN</button>
         </div>
         <div id="results" class="results empty-results">
-          <div class="result-empty"><span>◇</span><h3>Prêt pour l’analyse</h3><p>Ajoutez au moins trois héros possédés puis lancez l’optimiseur.</p></div>
+          <div class="result-empty"><span>◇</span><h3>Prêt quand vous l’êtes</h3><p>Cochez trois héros possédés, puis générez votre plan.</p></div>
         </div>
       </section>
 
-      <section id="evidence" class="content-section">
+      <details id="evidence" class="advanced-section content-section">
+        <summary><span>Journal de rapports &amp; recherche</span><small>Facultatif — pour tester une hypothèse</small></summary>
         <div class="section-heading"><div><p class="eyebrow">05 · CALIBRATION</p><h2>Transformer vos rapports en preuves</h2><p>Enregistrez les résultats de tests contrôlés. Une série ne valide pas une formule, mais elle rend les écarts visibles et prépare la régression future.</p></div></div>
         <div class="evidence-layout">
           <article class="panel observation-panel"><div class="panel-title"><span class="step">R</span><h3>Ajouter un rapport réel</h3></div><div class="form-row triple"><label>Dégâts observés <input id="observedDamage" type="number" min="1" placeholder="ex. 24500000" /></label><label>Type <select id="observationType"><option value="leader">Mon rally</option><option value="join">Rally rejoint</option></select></label><label>Répétitions <input id="observationRuns" type="number" min="1" value="1" /></label></div><label>Note de contrôle <input id="observationNote" type="text" maxlength="100" placeholder="Un seul buff modifié, mêmes participants…" /></label><button id="addObservation" class="secondary-button">Ajouter au journal</button><p class="microcopy">Bon protocole : même leader, mêmes troupes, même taille de rally, une seule variable modifiée, puis plusieurs répétitions.</p></article>
           <article class="panel journal-panel"><div class="panel-title"><span class="step">Σ</span><h3>Journal local</h3><button id="clearObservations" class="text-button danger">Effacer</button></div><div id="observationList" class="observation-list"><p class="muted">Aucun rapport sauvegardé sur cet appareil.</p></div></article>
         </div>
         <div class="research-links"><a href="research.html" target="_blank">Recherche ↗</a><a href="formulas.html" target="_blank">Formules ↗</a><a href="standard_joiner_profile.json" target="_blank">Profil joiner ↗</a></div>
-      </section>
+      </details>
     </main>
 
     <dialog id="heroDialog" class="hero-dialog"><form method="dialog" id="customHeroForm"><div class="dialog-heading"><div><p class="eyebrow">FICHE LOCALE</p><h2>Ajouter un héros</h2></div><button class="dialog-close" value="cancel" aria-label="Fermer">×</button></div><p>Ajoutez seulement une valeur dont vous pouvez conserver la source. Une fiche locale est marquée « à vérifier » et n’est pas fusionnée avec les données de recherche.</p><div class="form-row"><label>Nom <input id="customHeroName" required maxlength="36" /></label><label>Génération <select id="customHeroGeneration"></select></label></div><div class="form-row"><label>Classe <select id="customHeroClass"><option value="infantry">Infanterie</option><option value="lancer">Lancier</option><option value="marksman">Tireur</option></select></label><label>Premier skill <input id="customHeroSkill" required maxlength="60" placeholder="ex. +25% dégâts toutes troupes" /></label></div><div class="form-row"><label>Catégorie <select id="customHeroCategory"><option value="damage">Dégâts</option><option value="attack">Attaque</option><option value="lethality">Létalité</option><option value="enemyDefense">Déf. ennemie</option><option value="unknown">Inconnue</option></select></label><label>Valeur niv. 5 (%) <input id="customHeroValue" type="number" min="0" max="500" value="0" /></label></div><label>Source / note <input id="customHeroSource" maxlength="120" placeholder="URL, test ingame, capture…" /></label><button class="secondary-button" value="default">Ajouter la fiche</button></form></dialog>

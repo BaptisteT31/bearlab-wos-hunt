@@ -43,19 +43,15 @@ Dans le cas contraire, BearLab indique une **frontière de Pareto** plutôt qu�
 
 ### Leader
 
-Pour les héros sourcés et possédés, le moteur énumère toutes les combinaisons de trois héros. Il choisit le leader qui maximise la borne basse suivante : la liste de bonus permanents de dégâts de toutes troupes documentés. Les égalités sont seulement affichées avec leur vecteur Attaque / Létalité; le départage n’est pas présenté comme une formule de combat.
+Pour les héros sourcés et possédés, le moteur énumère toutes les combinaisons de trois héros. Contrairement à un joiner, le leader apporte toutes les compétences d’expédition de ses trois héros : BearLab ajoute donc les **effets offensifs documentés** au vecteur, pas seulement le premier skill. Les effets défensifs sont exclus du score Bear et les procs sont tracés séparément.
+
+Le tri de lecture est explicite : dégâts permanents toutes troupes, puis attaque toutes troupes, létalité, vulnérabilité cible, dégâts normaux et dégâts par type. C’est une priorité de décision, pas une formule de dégâts ni une preuve qu’un point d’une catégorie vaut un point d’une autre. Les autres équipes non dominées restent affichées comme alternatives.
 
 Les skills temporaires ou probabilistes sont tracés dans `P`. Le moteur ne les divise pas par une constante arbitraire.
 
 ### Joiner
 
-La recommandation de premier héros se limite aux skills d’expédition permanents et traçables. Elle avertit toujours que le skill ne compte que s’il est sélectionné parmi les quatre joiners actifs. Le profil standard fixe :
-
-```text
-Jessie (slot 1) → Jasser (slot 2) → Seo-yoon (slot 3)
-```
-
-Le jeu de données et l’hypothèse sont dans [`standard_joiner_profile.json`](standard_joiner_profile.json).
+La recommandation de joiner ne regarde que le premier skill d’expédition du héros en premier slot. Les héros 2 et 3 ne modifient pas le Bear : ils sont utiles à la capacité de déploiement, pas au buff. Le résultat avertit toujours que le skill ne compte que s’il est sélectionné parmi les quatre joiners actifs, visibles par le drapeau jaune dans le jeu.
 
 ### Troupes et marches
 
@@ -65,7 +61,7 @@ La répartition de départ est :
 10 % infanterie / 10 % lanciers / 80 % tireurs
 ```
 
-Elle est appliquée par marche en respectant la capacité et les stocks; quand un stock est insuffisant, la marche est remplie par les autres types disponibles. Elle est étiquetée comme doctrine communautaire. Aucune valeur de tier, santé, défense ou puissance n’est utilisée comme équivalent secret de dégâts.
+Elle est appliquée par marche en respectant la capacité et les stocks; quand un stock est insuffisant, la marche est remplie par les autres types disponibles. Elle est étiquetée comme doctrine communautaire. Aucune valeur de tier, Fire Crystal, santé, défense ou puissance n’est utilisée comme équivalent secret de dégâts. Les bonus propres aux tireurs restent distincts, puisque la marche n’est pas 100 % tireurs.
 
 ## Espérance des skills à proc
 
