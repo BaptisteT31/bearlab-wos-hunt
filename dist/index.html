@@ -7,6 +7,7 @@
     <title>BearLab — Whiteout Survival</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23071122' d='M0 0h64v64H0z'/%3E%3Cpath fill='%235eead4' d='M32 6 47 20v25L32 58 17 45V20z'/%3E%3Cpath fill='%23071122' d='M21 25h22v5H21zm3 9h16v5H24z'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="design.css" />
   </head>
   <body>
     <header class="topbar">
@@ -96,7 +97,7 @@
       <section id="heroes" class="content-section">
         <div class="section-heading">
           <div><p class="eyebrow">02 · TON ROSTER</p><h2>Choisis tes héros</h2><p>Coche les héros possédés et leur niveau de skill drapeau.</p></div>
-          <div class="legend"><span class="legend-dot verified"></span> pris en charge <span class="legend-dot pending"></span> à vérifier</div>
+          <div class="legend"><span class="legend-dot verified"></span> pris en charge <span class="legend-dot pending"></span> à vérifier <a class="portrait-credit" href="https://www.whiteoutsurvival.wiki/heroes/" target="_blank" rel="noreferrer">Portraits ↗</a></div>
         </div>
         <div class="hero-toolbar">
           <div class="filter-group" id="heroFilters" aria-label="Filtrer les héros"><button data-filter="verified" class="filter-button active">Fiches sourcées</button><button data-filter="owned" class="filter-button">Possédés</button><button data-filter="all" class="filter-button">Tout voir</button></div>
@@ -125,7 +126,6 @@
       <section id="optimizer" class="content-section optimizer-section">
         <div class="optimizer-header">
           <div><p class="eyebrow">03 · TON PLAN</p><h2>Prêt à lancer</h2><p>Un leader, tes marches, les points à surveiller.</p></div>
-          <img class="plan-art" src="assets/compass-map.png" alt="Boussole sur une carte enneigée" />
           <button id="optimize" class="optimize-button"><span>◆</span> GÉNÉRER MON PLAN</button>
         </div>
         <div id="results" class="results empty-results">

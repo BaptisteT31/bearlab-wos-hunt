@@ -3,6 +3,34 @@
 const STORAGE_KEY = "bearlab-profile-v1";
 const OBSERVATIONS_KEY = "bearlab-observations-v1";
 
+// Portraits are deliberately loaded from the community wiki's asset host rather
+// than copied into this public repository. If a remote source disappears, the
+// initials beneath the image remain visible as a graceful fallback.
+const HERO_PORTRAITS = {
+  jessie:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/jessie.png",
+  jasser:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/10/1.jpg",
+  seoyoon:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/10/2.jpg",
+  jeronimo:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/jeronimo.png",
+  natalia:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/natalia.png",
+  molly:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/molly.png",
+  zinman:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/zinman.png",
+  flint:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/flint.png",
+  alonso:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/alonso.png",
+  philly:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/philly.png",
+  mia:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/mia.png",
+  greg:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/greg.png",
+  logan:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/logan.png",
+  ahmose:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/ahmos.png",
+  reina:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/1690429616516_7.jpg",
+  lynn:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/1690429616507_5.jpg",
+  hector:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/1690429616489_3.jpg",
+  norah:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/1690429616480_2.jpg",
+  gwen:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/09/1690429616472_1.jpg",
+  sergey:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/sergey.png",
+  bahiti:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/bahiti.png",
+  patrick:"https://gom-s3-user-avatar.s3.us-west-2.amazonaws.com/wp-content/uploads/2023/05/patrick.png"
+};
+
 const CORE_HEROES = [
   { id:"jessie", name:"Jessie", generation:1, troop:"lancer", rarity:"Épique", verified:true, source:"Fitz registry + 3 guides", primary:{ name:"Stand of Arms", values:[5,10,15,20,25], category:"damage", text:"Dégâts infligés par toutes les troupes" }, leader:{damage:25}, note:"Joiner stable : bonus permanent toutes troupes." },
   { id:"jasser", name:"Jasser", generation:1, troop:"marksman", rarity:"Épique", verified:true, source:"Fitz registry + Pillar", primary:{ name:"Tactical Genius", values:[5,10,15,20,25], category:"damage", text:"Dégâts infligés par toutes les troupes" }, leader:{damage:25}, note:"Même famille d’effet que Jessie." },
@@ -98,6 +126,11 @@ function categoryLabel(category) { return ({damage:"Dégâts toutes troupes",att
 function initialHeroState(hero) { return { owned:!!hero.owned, skill:5, stars:4, widget:0 }; }
 function getHeroState(id) { return heroState[id] || initialHeroState(heroes.find(h=>h.id===id) || {}); }
 function setHeroState(id, next) { heroState[id] = {...getHeroState(id),...next}; }
+function heroPortrait(hero) {
+  const initials = hero.name.split(/[ -]/).filter(Boolean).map(word=>word[0]).slice(0,2).join("").toUpperCase();
+  const source = HERO_PORTRAITS[hero.id];
+  return `<div class="hero-avatar" aria-hidden="true"><span>${initials}</span>${source ? `<img src="${source}" alt="" loading="lazy" referrerpolicy="no-referrer" />` : ""}</div>`;
+}
 
 function renderHeroes() {
   const gen = selectedGeneration();
@@ -110,7 +143,7 @@ function renderHeroes() {
     const value = hero.primary.values[(state.skill || 1) - 1] || 0;
     const status = hero.verified ? "<span class=\"status-chip verified\">sourcé</span>" : "<span class=\"status-chip pending\">à vérifier</span>";
     return `<article class="hero-card ${hero.troop} ${state.owned?"owned":""} ${hero.verified?"":"pending"}" data-hero="${hero.id}">
-      <div class="hero-head"><div><h3 class="hero-name">${hero.name}</h3><div class="hero-meta">G${hero.generation} · ${hero.rarity} · ${troopLabel(hero.troop)}</div></div>${status}</div>
+      <div class="hero-overview">${heroPortrait(hero)}<div class="hero-head"><div><h3 class="hero-name">${hero.name}</h3><div class="hero-meta">G${hero.generation} · ${hero.rarity} · ${troopLabel(hero.troop)}</div></div>${status}</div></div>
       <p class="hero-skill"><b>${hero.primary.name} · ${categoryLabel(hero.primary.category)}</b>${hero.primary.text}${value ? ` <strong>+${value}%</strong>` : ""}</p>
       <div class="hero-controls"><label>Skill drapeau<select class="hero-skill-select" data-id="${hero.id}" ${hero.verified?"":"disabled"}>${[1,2,3,4,5].map(n=>`<option value="${n}" ${state.skill===n?"selected":""}>Niv. ${n}</option>`).join("")}</select></label><label class="own-check"><input class="hero-owned" data-id="${hero.id}" type="checkbox" ${state.owned?"checked":""} /> Possédé</label></div>
       <p class="hero-source">${hero.note}<br>Source : ${hero.source}</p>
